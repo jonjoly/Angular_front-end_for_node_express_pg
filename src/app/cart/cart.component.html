@@ -1,0 +1,29 @@
+<form #addForm="ngForm" (ngSubmit)=(addItem(addForm))>
+
+    <label for="product">Product</label>
+    <input type="text" id="product" name="product" ngModel>
+
+    <label for="text">Price</label>
+    <input type="number" name="price" id="price" ngModel>
+
+    <label for="quantity">Quantity</label>
+    <input type="text" name="quantity" id="quantity" ngModel>
+    <button>Submit</button>
+</form>
+<ol>
+
+    <li *ngFor="let item of cartItems; index as i">
+        <p>{{item.product}}</p>
+        <p>{{item.price}}</p>
+        <p>{{item.quantity}}</p>
+        <button (click)="deleteItem(item.id)">X</button>
+
+        <button (click)="showForm(i)" *ngIf="(showIndex!=i)">Show Update Quantity</button>
+
+        <form *ngIf="showIndex===i" #updateForm="ngForm" (ngSubmit)="updateItem(updateForm,item)">
+            <label for="quantity"></label>
+            <input type="text" name="quantity" id="quantity" ngModel>
+            <button>Update</button>
+        </form>
+    </li>
+</ol>
